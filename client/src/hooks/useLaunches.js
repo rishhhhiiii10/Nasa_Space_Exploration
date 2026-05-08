@@ -1,14 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
-
-import { httpGetLaunches, httpSubmitLaunch, httpAbortLaunch } from "./requests";
+import {
+  httpGetLaunches,
+  httpGetUpcomingLaunches,
+  httpSubmitLaunch,
+  httpAbortLaunch,
+} from "./requests";
 
 function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
   const [launches, saveLaunches] = useState([]);
+  const [upcomingLaunches, saveUpcomingLaunches] = useState([]);
   const [isPendingLaunch, setPendingLaunch] = useState(false);
 
   const getLaunches = useCallback(async () => {
-    const fetchedLaunches = await httpGetLaunches();
-    saveLaunches(fetchedLaunches);
+    const [allLaunches, upcoming] = await Promise.all([
+      httpGetLaunches(),
+      httpGetUpcomingLaunches(),
+    ]);
+    saveLaunches(allLaunches);
+    saveUpcomingLaunches(upcoming);
   }, []);
 
   useEffect(() => {
@@ -31,7 +40,6 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
         target,
       });
 
-      // TODO: Set success based on response.
       const success = response.ok;
       if (success) {
         getLaunches();
@@ -50,7 +58,6 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
     async (id) => {
       const response = await httpAbortLaunch(id);
 
-      // TODO: Set success based on response.
       const success = response.ok;
       if (success) {
         getLaunches();
@@ -64,6 +71,7 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
 
   return {
     launches,
+    upcomingLaunches,
     isPendingLaunch,
     submitLaunch,
     abortLaunch,

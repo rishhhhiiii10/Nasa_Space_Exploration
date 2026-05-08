@@ -1,4 +1,5 @@
 const API_URL = "/v1";
+
 async function httpGetPlanets() {
   const response = await fetch(`${API_URL}/planets`);
   return await response.json();
@@ -10,20 +11,22 @@ async function httpGetLaunches() {
   return fetchedLaunches.sort((a, b) => a.flightNumber - b.flightNumber);
 }
 
+async function httpGetUpcomingLaunches() {
+  const response = await fetch(`${API_URL}/launches/upcoming`);
+  const fetchedLaunches = await response.json();
+  return fetchedLaunches.sort((a, b) => a.flightNumber - b.flightNumber);
+}
+
 async function httpSubmitLaunch(launch) {
   try {
     return await fetch(`${API_URL}/launches`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(launch),
     });
   } catch (err) {
     console.log(err);
-    return {
-      ok: false,
-    };
+    return { ok: false };
   }
 }
 
@@ -34,10 +37,14 @@ async function httpAbortLaunch(id) {
     });
   } catch (err) {
     console.log(err);
-    return {
-      ok: false,
-    };
+    return { ok: false };
   }
 }
 
-export { httpGetPlanets, httpGetLaunches, httpSubmitLaunch, httpAbortLaunch };
+export {
+  httpGetPlanets,
+  httpGetLaunches,
+  httpGetUpcomingLaunches,
+  httpSubmitLaunch,
+  httpAbortLaunch,
+};

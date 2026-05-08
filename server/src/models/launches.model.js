@@ -116,6 +116,12 @@ async function saveLaunch(launch) {
   );
 }
 
+async function getUpcomingLaunches() {
+  return await launchesDatabase
+    .find({ upcoming: true }, { _id: 0, __v: 0 })
+    .lean();
+}
+
 async function scheduleNewLaunch(launch) {
   const planet = await planetsDatabase.findOne({
     keplerName: launch.target,
@@ -151,6 +157,7 @@ module.exports = {
   loadLaunchData,
   existsLaunchWithId,
   getAllLaunches,
+  getUpcomingLaunches,
   scheduleNewLaunch,
   abortLaunchById,
 };

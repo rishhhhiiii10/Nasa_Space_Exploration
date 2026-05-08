@@ -1,5 +1,6 @@
 const {
   getAllLaunches,
+  getUpcomingLaunches,
   existsLaunchWithId,
   abortLaunchById,
   scheduleNewLaunch,
@@ -35,6 +36,10 @@ async function httpAddNewLaunch(req, res) {
   return res.status(201).json(launch);
 }
 
+async function httpGetUpcomingLaunches(req, res) {
+  return res.status(200).json(await getUpcomingLaunches());
+}
+
 async function httpAbortLaunch(req, res) {
   const launchId = Number(req.params.id);
 
@@ -59,4 +64,5 @@ module.exports = {
   httpGetAllLaunches,
   httpAddNewLaunch,
   httpAbortLaunch,
+  httpGetUpcomingLaunches,
 };
