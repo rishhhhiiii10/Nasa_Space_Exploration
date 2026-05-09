@@ -10,7 +10,7 @@
       S P A C E   E X P L O R A T I O N
 ```
 
-_"The universe is under no obligation to make sense to you."_
+*"The universe is under no obligation to make sense to you."*
 — Neil deGrasse Tyson
 
 [![JavaScript](https://img.shields.io/badge/JavaScript-89.4%25-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://github.com/rishhhhiiii10/Nasa_Space_Exploration)
@@ -18,6 +18,9 @@ _"The universe is under no obligation to make sense to you."_
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://github.com/rishhhhiiii10/Nasa_Space_Exploration)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Connected-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://github.com/rishhhhiiii10/Nasa_Space_Exploration)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blueviolet?style=flat-square)](https://opensource.org/licenses/ISC)
+[![Live on AWS EC2](https://img.shields.io/badge/AWS%20EC2-Live%20%F0%9F%9F%A2-FF9900?style=flat-square&logo=amazon-aws&logoColor=white)](http://13.234.34.115:8000/)
+
+### 🟢 Live Demo → [http://13.234.34.115:8000/](http://13.234.34.115:8000/)
 
 </div>
 
@@ -48,6 +51,10 @@ Whether you're a stargazer or a developer, this app is your launchpad. 🛸
                          │
                     🐳 Docker
                 (node:lts-alpine)
+                         │
+                   ☁️  AWS EC2
+            (Production — ap-south-1)
+              http://13.234.34.115:8000
 ```
 
 ---
@@ -120,17 +127,17 @@ This launches both the React dev server and the Express backend simultaneously. 
 
 ## 🌠 All Mission Commands
 
-| Command                  | What It Does                                  |
-| ------------------------ | --------------------------------------------- |
-| `npm run install`        | 📦 Install all dependencies (client + server) |
-| `npm run install-server` | ⚙️ Install server dependencies only           |
-| `npm run install-client` | 🖥️ Install client dependencies only           |
-| `npm run watch`          | 🔭 Start both client & server (dev mode)      |
-| `npm run server`         | ⚡ Start server with file watching            |
-| `npm run client`         | 🌐 Start React dev server only                |
-| `npm run deploy`         | 🚀 Build client & launch production server    |
-| `npm run deploy-cluster` | 🌌 Multi-core cluster mode deployment         |
-| `npm test`               | 🧪 Run all tests (client + server)            |
+| Command | What It Does |
+|---|---|
+| `npm run install` | 📦 Install all dependencies (client + server) |
+| `npm run install-server` | ⚙️ Install server dependencies only |
+| `npm run install-client` | 🖥️ Install client dependencies only |
+| `npm run watch` | 🔭 Start both client & server (dev mode) |
+| `npm run server` | ⚡ Start server with file watching |
+| `npm run client` | 🌐 Start React dev server only |
+| `npm run deploy` | 🚀 Build client & launch production server |
+| `npm run deploy-cluster` | 🌌 Multi-core cluster mode deployment |
+| `npm test` | 🧪 Run all tests (client + server) |
 
 ---
 
@@ -151,6 +158,40 @@ npm run deploy-cluster
 ```
 
 Deploys across multiple CPU cores using Node.js clustering — ideal for heavy traffic and production environments.
+
+---
+
+## ☁️ AWS EC2 — Live in Production
+
+The app is deployed and running on an **AWS EC2** instance in the `ap-south-1` (Mumbai) region.
+
+| Detail | Value |
+|---|---|
+| 🌐 Live URL | [http://13.234.34.115:8000/](http://13.234.34.115:8000/) |
+| ☁️ Cloud Provider | Amazon Web Services (AWS) |
+| 🖥️ Instance | EC2 (Amazon Linux / Ubuntu) |
+| 🌍 Region | ap-south-1 (Mumbai) |
+| 🚢 Deployment | Docker container on EC2 |
+| 🔌 Port | 8000 (publicly exposed) |
+
+### How It's Deployed
+
+```bash
+# 1. SSH into your EC2 instance
+ssh -i your-key.pem ec2-user@13.234.34.115
+
+# 2. Clone the repo
+git clone https://github.com/rishhhhiiii10/Nasa_Space_Exploration.git
+cd Nasa_Space_Exploration
+
+# 3. Build the Docker image
+docker build -t nasa-space-exploration .
+
+# 4. Run the container (detached)
+docker run -d -p 8000:8000 --restart unless-stopped nasa-space-exploration
+```
+
+> 💡 Make sure port `8000` is open in your EC2 **Security Group** inbound rules.
 
 ---
 
@@ -214,6 +255,7 @@ Please write clear commit messages and test your changes before submitting. ✅
 - ⚛️ [Create React App](https://create-react-app.dev/) — React made simple
 - 🍃 [Mongoose](https://mongoosejs.com/) — elegant MongoDB object modelling
 - 🐳 [Docker](https://www.docker.com/) — because containers are the new rockets
+- ☁️ [AWS EC2](https://aws.amazon.com/ec2/) — powering the production universe
 
 ---
 
@@ -225,7 +267,7 @@ Licensed under the **ISC License**. Free to use, explore, and adapt.
 
 <div align="center">
 
-_Built with ❤️ and a deep curiosity for what lies beyond._
+*Built with ❤️ and a deep curiosity for what lies beyond.*
 
 **🌌 Ad Astra — To the Stars 🌌**
 
